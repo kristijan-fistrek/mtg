@@ -10,6 +10,6 @@ export const fetchCardsByName = (name: string) => {
 }
 
 export const fetchCardsByKeywords = (keyword: string) => {
-    const url = `https://api.scryfall.com/cards/autocomplete=${keyword}`
+    const url = `https://api.scryfall.com/cards/autocomplete?q=${keyword}`
     return MtgApiService.get<any>(url);
 }

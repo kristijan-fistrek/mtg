@@ -1,12 +1,12 @@
 
 import { useEffect} from "react";
-import { fetchCardsByName } from "../../controllers/MtgApiController";
+import { fetchCardsByKeywords, fetchCardsByName } from "../../controllers/MtgApiController";
 
 const Homepage = () => {
 
     const fetchData = async () => {
          try {
-            const data = await fetchCardsByName("Ab");
+            const data = await fetchCardsByKeywords("Ab");
             console.log("Ispis podataka: ")
             console.log(data);
          } catch (error) {

@@ -7,6 +7,10 @@ export interface ImageUris {
     border_crop: string
 }
 
+export interface AutocompleteCardSearch {
+    card_names: string[]
+}
+
 export interface Card {
     name: string,
     mana_cost: string,
