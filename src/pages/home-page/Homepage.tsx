@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as Magic from 'mtgsdk-ts';
 import {Card, MagicEmitter} from "mtgsdk-ts";
 import {JSX, useEffect} from "react";
@@ -15,6 +16,17 @@ const Homepage = (): JSX.Element => {
     useEffect(() => {
         fetchData();
     })
+=======
+
+import { useEffect } from 'react';
+
+const Homepage = () => {
+
+    useEffect(() => { 
+        //fetchData(); 
+        console.log('Homepage component mounted');
+    }, [])
+>>>>>>> 7b3267f8522bc82af8af7614f6808cbc20dbd5ec
 
     return (
         <>

@@ -1,7 +1,7 @@
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import Homepage from "./pages/home-page/Homepage.tsx";
-import UserDashboard from './pages/user-dashboard-page/UserDashboard.tsx';
+import Homepage from './pages/home-page/Homepage';
+import UserDashboard from './pages/user-dashboard-page/UserDashboard';
 
 function App() {
     return (
