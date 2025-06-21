@@ -1,32 +1,22 @@
-<<<<<<< HEAD
-import * as Magic from 'mtgsdk-ts';
-import {Card, MagicEmitter} from "mtgsdk-ts";
-import {JSX, useEffect} from "react";
 
-const Homepage = (): JSX.Element => {
+import { useEffect} from "react";
+import { fetchCardsByName } from "../../controllers/MtgApiController";
 
-    const fetchData = (): MagicEmitter<Card> => {
-        return Magic.Cards.all({type: "Planeswalker", page: 2, pageSize: 30}).on("data", card => {
-            console.log(card.name);
-        }).on("end", () => {
-            console.log("done");
-        });
+const Homepage = () => {
+
+    const fetchData = async () => {
+         try {
+            const data = await fetchCardsByName("Ab");
+            console.log("Ispis podataka: ")
+            console.log(data);
+         } catch (error) {
+            console.log(error);
+         }
     }
 
     useEffect(() => {
         fetchData();
-    })
-=======
-
-import { useEffect } from 'react';
-
-const Homepage = () => {
-
-    useEffect(() => { 
-        //fetchData(); 
-        console.log('Homepage component mounted');
-    }, [])
->>>>>>> 7b3267f8522bc82af8af7614f6808cbc20dbd5ec
+    }, []);
 
     return (
         <>

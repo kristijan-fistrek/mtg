@@ -10,11 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^1.10.0",
-    "mtgsdk-ts": "^1.1.2",
-=======
->>>>>>> 7b3267f8522bc82af8af7614f6808cbc20dbd5ec
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2"
