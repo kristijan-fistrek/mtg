@@ -1,13 +1,15 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { fetchCardsByKeywords } from "../../controllers/MtgApiController";
-import type { Card } from "../../models/CardModel";
+import { useCardSearchContext } from "../../helpers/MTGContext";
 
 const DropdownComponent = () => {
 
+    const {
+        setSelectedCard
+    } = useCardSearchContext();
+
     const [showDropdown, setShowDropdown] = useState(false);
     const [query, setQuery] = useState("");
-    const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -17,7 +19,6 @@ const DropdownComponent = () => {
             const response = await fetchCardsByKeywords(query);
             setSuggestions(response.data.data);
             setShowDropdown(true);
-
         } catch (err) {
             console.error("Autocomplete error", err);
         }
@@ -47,7 +48,6 @@ const DropdownComponent = () => {
                 value={query}
                 onChange={(e) => {
                     setQuery(e.target.value);
-                    setSelectedCard(null);
                 }}
                 placeholder="Search Magic card..."
                 style={{ width: "100%", padding: "8px" }}
@@ -72,7 +72,7 @@ const DropdownComponent = () => {
                     {suggestions.map((name) => (
                         <li
                             key={name}
-                            onClick={() => setQuery(name)}
+                            onClick={() => setSelectedCard(name)}
                             style={{
                                 padding: "8px",
                                 cursor: "pointer",
