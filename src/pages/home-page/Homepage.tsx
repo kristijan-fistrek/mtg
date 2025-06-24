@@ -1,27 +1,19 @@
 
 import { useEffect} from "react";
-import { fetchCardsByKeywords, fetchCardsByName } from "../../controllers/MtgApiController";
+import DropdownComponent from "../../components/dropdown-component/DropdownComponent";
 
 const Homepage = () => {
 
-    const fetchData = async () => {
-         try {
-            const data = await fetchCardsByKeywords("Ab");
-            console.log("Ispis podataka: ")
-            console.log(data);
-         } catch (error) {
-            console.log(error);
-         }
-    }
-
     useEffect(() => {
-        fetchData();
     }, []);
 
     return (
         <>
             <div>
                 <p>Homepage</p>
+            </div>
+            <div>
+                <DropdownComponent />
             </div>
         </>
     )
