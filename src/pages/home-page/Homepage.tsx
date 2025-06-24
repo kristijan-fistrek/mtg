@@ -11,7 +11,7 @@ const Homepage = () => {
     return (
         <>
             <div>
-                <p>Homepage</p>
+                <p>Search Your Commander</p>
             </div>
             <div>
                 <DropdownComponent />

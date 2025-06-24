@@ -14,13 +14,14 @@ const DropdownComponent = () => {
   const [loading, setLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listboxId = "autocomplete-listbox";
 
   useEffect(() => {
-    if (debouncedQuery.length < 1) {
+    if (isSelecting || debouncedQuery.length < 1) {
       setSuggestions([]);
       setShowDropdown(false);
       return;
@@ -56,8 +57,10 @@ const DropdownComponent = () => {
   }, []);
 
   const handleSelect = (name: string) => {
+    setIsSelecting(true);
     setSelectedCard(name);
     setQuery(name);
+    setSuggestions([]);
     setShowDropdown(false);
   };
 
@@ -106,7 +109,7 @@ const DropdownComponent = () => {
                 role="option"
                 aria-selected={highlightedIndex === i}
                 className={`select-option ${highlightedIndex === i ? "highlighted" : ""}`}
-                onMouseDown={() => handleSelect(name)}
+                onClick={() => handleSelect(name)}
               >
                 {name}
               </li>

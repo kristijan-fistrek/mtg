@@ -8,21 +8,26 @@ export function useGetSelectedCardInfo() {
     const { selectedCard } = useCardSearchContext();
     const [cardInfo, setCardInfo] = useState<Card | null>(null);
 
-    const fetchDataPerSelectedCard = async () => { 
-        try {
-            // ubaciti poziv prema fetchCardsByName
-            const data = await fetchCardsByName(selectedCard);
-            setCardInfo(data);
-            console.log("Data from card: " + data);
+    const fetchDataPerSelectedCard = async () => {
+        if (selectedCard) {
+            try {
+                // ubaciti poziv prema fetchCardsByName
+                const data = await fetchCardsByName(selectedCard);
+                setCardInfo(data);
+                console.log("Data from card: " + data);
 
-        } catch (error) {
-            console.log("error")
+            } catch (error) {
+                console.log("error");
+            }
+        } else {
+            console.log("Card not selected.");
         }
-     }
 
-     useEffect(() => {
+    }
+
+    useEffect(() => {
         fetchDataPerSelectedCard();
-     }, [selectedCard]);
+    }, [selectedCard]);
 
     return { cardInfo };
 
