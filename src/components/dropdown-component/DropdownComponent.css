@@ -1,0 +1,60 @@
+/* Wrapper */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Input (styled like AntD Select input) */
+.select-input {
+  width: 100%;
+  padding: 8px 11px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.select-input:focus {
+  border-color: #4096ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Dropdown menu */
+.select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #d9d9d9;
+  background-color: white;
+  border-radius: 6px;
+  margin-top: 4px;
+  padding: 4px 0;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 11px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+/* Option items */
+.select-option {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.select-option:hover,
+.select-option.highlighted {
+  background-color: #e6f7ff;
+}
+
+/* Special states */
+.select-option.loading,
+.select-option.empty {
+  font-style: italic;
+  color: #999;
+  cursor: default;
+}
