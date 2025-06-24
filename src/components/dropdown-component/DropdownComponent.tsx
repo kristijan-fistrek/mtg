@@ -8,26 +8,25 @@ const DropdownComponent = () => {
   const { setSelectedCard } = useCardSearchContext();
 
   const [query, setQuery] = useState("");
-  const debouncedQuery = useDebounce(query, 300);
-
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  const [isSelecting, setIsSelecting] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
+  const debouncedQuery = useDebounce(query, 300);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listboxId = "autocomplete-listbox";
 
   useEffect(() => {
-    if (isSelecting || debouncedQuery.length < 1) {
+    if (!isTyping || debouncedQuery.trim().length < 1) {
       setSuggestions([]);
       setShowDropdown(false);
       return;
     }
 
-    const load = async () => {
+    const fetchSuggestions = async () => {
       setLoading(true);
       try {
         const res = await fetchCardsByKeywords(debouncedQuery);
@@ -38,13 +37,14 @@ const DropdownComponent = () => {
       } catch (err) {
         console.error(err);
         setSuggestions([]);
+        setShowDropdown(false);
       } finally {
         setLoading(false);
       }
     };
 
-    load();
-  }, [debouncedQuery]);
+    fetchSuggestions();
+  }, [debouncedQuery, isTyping]);
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {
@@ -57,10 +57,9 @@ const DropdownComponent = () => {
   }, []);
 
   const handleSelect = (name: string) => {
-    setIsSelecting(true);
     setSelectedCard(name);
     setQuery(name);
-    setSuggestions([]);
+    setIsTyping(false); // sprečava ponovno otvaranje dropdowna nakon odabira
     setShowDropdown(false);
   };
 
@@ -87,7 +86,10 @@ const DropdownComponent = () => {
         type="text"
         className="select-input"
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={e => {
+          setQuery(e.target.value);
+          setIsTyping(true); // označava da korisnik aktivno pretražuje
+        }}
         placeholder="Search Magic card..."
         role="combobox"
         aria-autocomplete="list"
@@ -104,12 +106,12 @@ const DropdownComponent = () => {
           {!loading &&
             suggestions.map((name, i) => (
               <li
-                key={name}
+                key={`${name}-${i}`}
                 id={`option-${i}`}
                 role="option"
                 aria-selected={highlightedIndex === i}
                 className={`select-option ${highlightedIndex === i ? "highlighted" : ""}`}
-                onClick={() => handleSelect(name)}
+                onMouseDown={() => handleSelect(name)}
               >
                 {name}
               </li>

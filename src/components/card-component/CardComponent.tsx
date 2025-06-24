@@ -1,9 +1,11 @@
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
 import { useGetSelectedCardInfo } from "../../hooks/useGetSelectedCardInfo";
 
 const CardComponent = () => {
 
     const selectedCardInformation = useGetSelectedCardInfo();
+
+    const [hideSelectedCardInformation, setHideSelectedCardInformation] = useState<boolean>(false);
 
     const DisplayCardComponent = (): JSX.Element => {
         if (selectedCardInformation.cardInfo) {
