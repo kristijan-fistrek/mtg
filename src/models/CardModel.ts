@@ -14,6 +14,7 @@ export interface AutocompleteCardSearch {
 export interface Card {
     name: string,
     mana_cost: string,
+    colors: string[],
     power: number,
     toughness: number,
     oracle_text: string,

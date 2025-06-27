@@ -15,6 +15,7 @@ const CardComponent = () => {
                         <p>{selectedCardInformation.cardInfo.name}</p>
                         <img src={selectedCardInformation.cardInfo?.image_uris["small"]} alt="Selected Commander Image" />
                     </div>
+                    
                 </>
             )
         } else {

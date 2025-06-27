@@ -1,4 +1,5 @@
 import type { Card } from "../models/CardModel";
+import type { DeckAttributes } from "../models/DeckAttributes";
 import { MtgApiService } from "../services/MtgApiService";
 
 // Integrirati metodu za autocomplete
@@ -12,4 +13,9 @@ export const fetchCardsByName = (name: string | null) => {
 export const fetchCardsByKeywords = (keyword: string) => {
     const url = `https://api.scryfall.com/cards/autocomplete?q=${keyword}`
     return MtgApiService.get<any>(url);
+}
+
+export const fetchCardsByCustomQuery = (query: DeckAttributes) => {
+    const url = `https://api.scryfall.com/cards/search?order=released&q=${query.color}`;
+    return MtgApiService.get<Card[]>(url);
 }
