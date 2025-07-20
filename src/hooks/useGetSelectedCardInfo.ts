@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCardSearchContext } from "../helpers/MTGContext";
 import type { Card } from "../models/CardModel";
-import { fetchCardsByName } from "../controllers/MtgApiController";
+import { fetchCardsByCustomQuery, fetchCardsByName } from "../controllers/MtgApiController";
 
 export function useGetSelectedCardInfo() {
 
@@ -29,7 +29,10 @@ export function useGetSelectedCardInfo() {
                         border_crop: data.image_uris?.border_crop || ""
                     }
                 });
-                console.log(data);
+                console.log(data + " _ " + data.colors.join(""));
+                const result = await fetchCardsByCustomQuery({
+                    color: data.colors ? data.colors.join("") : ""});
+                console.log(result);
 
             } catch (error) {
                 console.log("error");

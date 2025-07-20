@@ -16,6 +16,6 @@ export const fetchCardsByKeywords = (keyword: string) => {
 }
 
 export const fetchCardsByCustomQuery = (query: DeckAttributes) => {
-    const url = `https://api.scryfall.com/cards/search?order=released&q=${query.color}`;
+    const url = `https://api.scryfall.com/cards/search?order=released&q=color:${query.color}`;
     return MtgApiService.get<Card[]>(url);
 }
